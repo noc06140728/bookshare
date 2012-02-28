@@ -1,4 +1,5 @@
 # coding: utf-8
+import string
 import hashlib
 
 from google.appengine.api import mail
@@ -39,7 +40,10 @@ class SignupPage(BaseHandler):
                 key = self.request.get('key1') + self.request.get('key2') + self.request.get('key3') + self.request.get('hkey')
                 if not ActivateKey.validate(email, key):
                     raise AppError(u'不正な Activate Key です。')
-                user = User(key_name=email, email=email, password=hashlib.md5(email + self.request.get('password')).hexdigest())
+                password = self.request.get('password')
+                if not string.strip(password):
+                    raise AppError(u'パスワードが未入力です。')
+                user = User(key_name=email, email=email, password=hashlib.md5(email + password).hexdigest())
                 user.put()
                 self.redirect('/')
 
