@@ -1,4 +1,5 @@
 # coding: utf-8
+import string
 from handlers.base import BaseHandler
 
 from entities.book import Book
@@ -28,7 +29,7 @@ class AddBookPage(BaseHandler):
     def post(self):
         try:
             keyword = self.request.get('q')
-            if not keyword:
+            if not string.strip(keyword):
                 raise AppError(u'キーワードが入力されていません。')
 
             books = Book.search(keyword)
