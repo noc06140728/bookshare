@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Book Detail{% endblock %}
+
+{% block nav %}
+              <li><a href="/">Home</a></li>
+              <li><a href="/list_book">My Books</a></li>
+              <li><a href="/add_book">Add Book</a></li>
+              <li><a href="/search_book">Search Books</a></li>
+{% endblock %}
+
+{% block content %}
+      <h1>Book Detail</h1>
+      <p>この本は、この人たちが持っています。</p>
+
+      <!-- Example row of columns -->
+
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        この本を持っている人が一覧表示されます。<br/>
+        <i class="icon-list-alt"></i> をクリックすると、その人が他にどんな本を持っているかを確認できます。<br/>
+        <i class="icon-envelope"></i> をクリックすると、その人にメールを送信することができます。
+      </div>
+
+      <blockquote>
+        {% if book.isbn %}<div class="isbn">{{ book.isbn }}</div>{% endif %}
+        <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
+        <div class="title">{{ book.title }}</div>
+        {% if book.author %}<div class="author">{{ book.author }}</div>{% endif%}
+        {% if book.publisher %}<div class="publisher">{{ book.publisher }}</div>{% endif%}
+
+        <ul>
+          {% for user in users %}
+          <li>
+            {{ user.user.email }}
+            <a href="/list_book?email={{ user.user.email }}" title="list book"><i class="icon-list-alt"></i></a>
+            <a href="mailto:{{ user.user.email }}?subject=Please%20lend%20me%20the%20book." title="send mail"><i class="icon-envelope"></i></a>
+          </li>
+          {% endfor %}
+        </ul>
+      </blockquote>
+{% endblock %}

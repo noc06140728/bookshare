@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Add Book{% endblock %}
+
+{% block nav %}
+              <li><a href="/">Home</a></li>
+              <li><a href="/list_book">My Books</a></li>
+              <li class="active"><a href="#">Add Book</a></li>
+              <li><a href="/search_book">Search Books</a></li>
+{% endblock %}
+
+{% block content %}
+      <h1>Add Book</h1>
+      <p>あなたが持っている本を登録しましょう。</p>
+
+      <form class="well form-search" action="/add_book" method="post">
+        <input class="search-query" type="text" name="q" value="{{ keyword }}"/>
+        <input type="submit" value="Search"/>
+      </form>
+
+      <!-- Example row of columns -->
+      
+      {% if books %}
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        検索した本は、 Add ボタンであなたの本の一覧に追加できます。
+      </div>
+      <ul class="thumbnails">
+        {% for book in books %}
+        <li class="span3">
+          <div class="thumbnail well book-thumbnail">
+            <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
+            <a style="float: right" class="btn btn-success btn-small" href="/add_book?id={{ book.volume_id }}">
+              <i class="icon-plus icon-white"></i> Add
+            </a>
+            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
+            {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
+            </p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        キーワードを入力して、あなたの持っている本を検索してください。<br/>
+      </div>
+      {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+application: hardwave-bookshare
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: lxml
+  version: latest
+- name: jinja2
+  version: latest
+
+handlers:
+- url: /css
+  static_dir: static/css
+  secure: always
+
+- url: /js
+  static_dir: static/js
+  secure: always
+
+- url: /img
+  static_dir: static/img
+  secure: always
+
+- url: /html
+  static_dir: static/html
+  secure: always
+
+- url: /.*
+  script: bookshare.app
+  secure: always
+

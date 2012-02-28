@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Search Books{% endblock %}
+
+{% block nav %}
+              <li><a href="/">Home</a></li>
+              <li><a href="/list_book">My Books</a></li>
+              <li><a href="/add_book">Add Book</a></li>
+              <li class="active"><a href="#">Search Books</a></li>
+{% endblock %}
+
+{% block content %}
+      <h1>Search Books</h1>
+      <p>他の人が持っている本を探してみましょう。</p>
+
+      <form class="well form-search" action="/search_book" method="post">
+        <input class="search-query" type="text" name="q" value="{{ keyword }}"/>
+        <input type="submit" value="Search"/>
+      </form>
+
+      <!-- Example row of columns -->
+
+      {% if books %}
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        検索した本のタイトルをクリックすると、本の持ち主の一覧が確認できます。
+      </div>
+      <ul class="thumbnails">
+        {% for book in books %}
+        <li class="span3">
+          <div class="thumbnail well book-thumbnail">
+            <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
+            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
+            {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
+            </p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        キーワードを入力して、他の人が持っている本を検索してください。<br/>
+      </div>
+      {% endif %}
+{% endblock %}

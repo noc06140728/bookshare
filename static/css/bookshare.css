@@ -1,0 +1,75 @@
+body {
+  padding-top: 60px;
+}
+
+.bookshare-logo {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.book-logo {
+  color: #00B;
+}
+
+.share-logo {
+  color: #08D;
+}
+
+.book-thumbnail {
+  height: 320px;
+}
+
+.book-img {
+  margin: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.isbn {
+  color: #999;
+}
+
+.isbn:before {
+  content: "[";
+}
+
+.isbn:after {
+  content: "]";
+}
+
+.title {
+  font-size: large;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.author {
+
+}
+
+.publisher {
+  color: #999;
+}
+
+.publisher:before {
+  content: "(";
+}
+
+.publisher:after {
+  content: ")";
+}
+
+@media (max-width: 480px) {
+  .hero-unit .btn {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-unit {
+    padding: 30px 10px;
+  }
+  .hero-unit H1 {
+    font-size: 40px;
+  }
+}
+

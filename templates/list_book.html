@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}List Book{% endblock %}
+
+{% block nav %}
+              <li><a href="/">Home</a></li>
+              <li class="active"><a href="#">My Books</a></li>
+              <li><a href="/add_book">Add Book</a></li>
+              <li><a href="/search_book">Search Books</a></li>
+{% endblock %}
+
+{% block content %}
+      {% if friend %}
+      <h1>{{ friend.email }}'s Books</h1>
+      <p>{{ friend.email }} さんは、こんな本を持っています。</p>
+      {% else %}
+      <h1>My Books</h1>
+      <p>あなたが持っている本の一覧をつくって、みんなと共有しましょう。</p>
+      <p><a class="btn btn-primary btn-large" href="/add_book">Add Books &raquo;</a></p>
+      {% endif %}
+
+      <!-- Example row of columns -->
+      {% if books %}
+      <ul class="thumbnails">
+        {% for book in books %}
+        <li class="span3">
+          <div class="thumbnail well book-thumbnail">
+            <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
+            {% if not friend %}<a style="float: right" class="btn btn-danger btn-small" href="/delete_book?id={{ book.volume_id }}">
+              <i class="icon-remove icon-white"></i> Delete
+            </a>{% endif%}
+            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
+            {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
+            </p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        {% if friend %}
+        {{ friend.email }} さんの本は、まだ1冊も登録されていません。</p>
+        {% else %}
+        あなたの本は、まだ1冊も登録されていません。 <br/>
+        Add Book ボタンをクリックして、あなたの持っている本を追加してください。
+        {% endif %}
+      </div>
+      {% endif %}
+{% endblock %}

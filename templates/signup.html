@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block nav %}
+              <li><a href="/">Home</a></li>
+              <li><a href="/list_book">My Books</a></li>
+              <li><a href="/add_book">Add Book</a></li>
+              <li><a href="/search_book">Search Books</a></li>
+{% endblock %}
+
+{% block content %}
+      <h1>Sign Up</h1>
+      <p>あなたのメールアドレスを登録してください。</p>
+
+      <div class="alert alert-block alert-info">
+        <h4 class="alert-heading">Hint!</h4>
+        Sign Up には、メールアドレスとパスワードの登録が必要です。<br/>
+        メールアドレスの有効性の確認のため、Activate Key をメールで送信します。<br/>
+        メールアドレスを入力して、Send Activate Key ボタンをクリックしてください。<br/>
+        受信したメールに書かれている Activate Key を入力して、Sign Up ボタンをクリックしてください。
+      </div>
+
+      <form class="form-horizontal" action="/signup" method="post">
+        <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="email">Email</label>
+          <div class="controls">
+            <input class="control" type="text" id="email" name="email" placeholder="Email" value="{{ email }}"/>
+            <button type="submit" class="btn btn-info" name="button" value="Send Activate Key">Send Activate Key</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="key1">Activate Key</label>
+          <div class="controls" id="activate-key">
+            <input class="control input-mini" type="text" name="key1" id="key1"/>
+            - <input class="control input-mini" type="text" name="key2"/>
+            - <input class="control input-mini" type="text" name="key3"/>
+              <input type="hidden" name="hkey" value="{{ hkey }}"/>
+            <p class="help-block">
+              Activate Key は、メールアドレスが有効であることを確認するためのものです。<br/>
+              受信したメールに書かれている Activate Key を入力してください。
+            </p>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input type="password" id="password" name="password" placeholder="Password"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" name="button" value="Sign up">Sign up</button>
+          <button type="reset" class="btn">Cancel</button>
+        </div>
+        </fieldset>
+      </form>
+{% endblock %}
