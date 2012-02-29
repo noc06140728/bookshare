@@ -8,6 +8,7 @@ from handlers.list_book import ListBookPage
 from handlers.delete_book import DeleteBookPage
 from handlers.show_book import ShowBookPage
 from handlers.search_book import SearchBookPage
+from handlers.shared_book import SharedBookPage
 
 app = webapp2.WSGIApplication([
         ('/signup', SignupPage),
@@ -16,6 +17,7 @@ app = webapp2.WSGIApplication([
         ('/list_book', ListBookPage),
         ('/delete_book', DeleteBookPage),
         ('/show_book', ShowBookPage),
-        ('/search_book', SearchBookPage)
+        ('/search_book', SearchBookPage),
+        ('/shared_book', SharedBookPage)
     ], debug=True)
 

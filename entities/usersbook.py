@@ -10,13 +10,16 @@ class UsersBook(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
 
     @classmethod
+    def all_books(cls):
+        ubook_id_set = cls.__get_book_id_set()
+        return [Book.get_by_key_name(volume_id) for volume_id in ubook_id_set]
+    
+    @classmethod
     def search(cls, keyword):
         ubook_id_set = cls.__get_book_id_set()
         book_id_set = google_book.get_id_set(keyword)
         id_list = list(ubook_id_set & book_id_set)[:30]
-        ubooks = UsersBook.gql('WHERE volume_id in :1', id_list)
-        id_set = set(ubook.volume_id for ubook in ubooks)
-        return (Book.get_by_key_name(volume_id) for volume_id in id_set)
+        return [Book.get_by_key_name(volume_id) for volume_id in id_list]
     
     @classmethod
     def get_by_volume_id(cls, volume_id):
