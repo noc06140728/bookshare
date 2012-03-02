@@ -1,5 +1,4 @@
 # coding: utf-8
-import string
 from handlers.base import BaseHandler
 
 from entities.usersbook import UsersBook
