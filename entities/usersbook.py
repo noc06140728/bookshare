@@ -2,7 +2,6 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 from user import User
 from book import Book
-import google_book
 
 class UsersBook(db.Model):
     user = db.ReferenceProperty(User)
@@ -17,7 +16,7 @@ class UsersBook(db.Model):
     @classmethod
     def search(cls, keyword):
         ubook_id_set = cls.__get_book_id_set()
-        book_id_set = google_book.get_id_set(keyword)
+        book_id_set = Book.get_id_set(keyword)
         id_list = list(ubook_id_set & book_id_set)[:30]
         return [Book.get_by_key_name(volume_id) for volume_id in id_list]
     

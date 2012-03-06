@@ -46,3 +46,7 @@ class Book(db.Model):
         books = google_book.search(keyword)
         return [cls.__get_instance(book) for book in books]
     
+    @classmethod
+    def get_id_set(cls, keyword):
+        return google_book.get_id_set(keyword)
+
