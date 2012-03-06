@@ -42,7 +42,7 @@ class Book(db.Model):
         return book
     
     @classmethod
-    def search(self, keyword):
+    def search(cls, keyword):
         books = google_book.search(keyword)
-        return [self.__get_instance(book) for book in books]
+        return [cls.__get_instance(book) for book in books]
     
