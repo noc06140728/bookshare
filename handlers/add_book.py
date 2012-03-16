@@ -11,13 +11,13 @@ class AddBookPage(BaseHandler):
     @basic_auth.required()
     def get(self):
         try:
-            volume_id = self.request.get('id')
-            if volume_id:
+            book_id = self.request.get('id')
+            if book_id:
                 user = basic_auth.get_current_user()
-                book = Book.get_by_key_name(volume_id)
+                book = Book.get_by_key_name(book_id)
                 if not book:
                     raise AppError(u'指定された本は見つかりませんでした。')
-                ubook = UsersBook(key_name=volume_id+':'+user.email, user=user, volume_id=volume_id)
+                ubook = UsersBook(key_name=book_id+':'+user.email, user=user, book_id=book_id)
                 ubook.put()
                 self.redirect('/list_book')
             else:

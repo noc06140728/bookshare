@@ -25,7 +25,7 @@ class ListBookPage(BaseHandler):
             else:
                 friend = None
                 ubooks = UsersBook.get_by_user(user)
-            books = [Book.get_by_key_name(ubook.volume_id) for ubook in ubooks]
+            books = [Book.get_by_key_name(ubook.book_id) for ubook in ubooks]
             self.render_template('list_book.html', {'books': books, 'friend': friend})
         except AppError, e:
             self.render_template('list_book.html', {'error_msg': e.message})

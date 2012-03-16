@@ -23,7 +23,7 @@
         <li class="span3">
           <div class="thumbnail well book-thumbnail">
             <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
-            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <div class="title"><a href="/show_book?id={{ book.book_id }}">{{ book.title }}</a></div>
             <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
             {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
             </p>

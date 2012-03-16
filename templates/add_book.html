@@ -30,10 +30,10 @@
         <li class="span3">
           <div class="thumbnail well book-thumbnail">
             <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
-            <a style="float: right" class="btn btn-success btn-small" href="/add_book?id={{ book.volume_id }}">
+            <a style="float: right" class="btn btn-success btn-small" href="/add_book?id={{ book.book_id }}">
               <i class="icon-plus icon-white"></i> Add
             </a>
-            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <div class="title"><a href="/show_book?id={{ book.book_id }}">{{ book.title }}</a></div>
             <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
             {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
             </p>

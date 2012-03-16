@@ -26,10 +26,10 @@
         <li class="span3">
           <div class="thumbnail well book-thumbnail">
             <img class="book-img" src="{{ book.image_url }}" alt="book-img"/>
-            {% if not friend %}<a style="float: right" class="btn btn-danger btn-small" href="/delete_book?id={{ book.volume_id }}">
+            {% if not friend %}<a style="float: right" class="btn btn-danger btn-small" href="/delete_book?id={{ book.book_id }}">
               <i class="icon-remove icon-white"></i> Delete
             </a>{% endif%}
-            <div class="title"><a href="/show_book?id={{ book.volume_id }}">{{ book.title }}</a></div>
+            <div class="title"><a href="/show_book?id={{ book.book_id }}">{{ book.title }}</a></div>
             <p>{% if book.author %}<span class="author">{{ book.author }}</span>{% endif%}
             {% if book.publisher %}<span class="publisher">{{ book.publisher }}</span>{% endif%}
             </p>
