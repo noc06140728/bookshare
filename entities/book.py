@@ -1,6 +1,6 @@
 from google.appengine.ext import db
-import google_book
-book_source = google_book
+import amazon_book
+book_source = amazon_book
 
 class Book(db.Model):
     book_id = db.StringProperty()
