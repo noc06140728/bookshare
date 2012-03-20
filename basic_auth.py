@@ -1,6 +1,9 @@
 import base64
 import hashlib
 
+from google.appengine.api import namespace_manager
+
+import tenant
 from entities.user import User
 
 class BasicAuthError(Exception):
@@ -13,6 +16,10 @@ def required(realm=None):
                 (method, encoded) = self.request.headers['AUTHORIZATION'].split()
                 if method.lower() == 'basic':
                     (login_id, password) = base64.b64decode(encoded).split(':')
+                    
+                    tenant_id = tenant.get_tenant_id(login_id)
+                    namespace_manager.set_namespace(tenant_id)
+                    
                     user = User.get_by_key_name(login_id)
                     if not user:
                         raise BasicAuthError

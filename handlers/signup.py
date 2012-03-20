@@ -2,18 +2,14 @@
 import string
 import hashlib
 
+from google.appengine.api import namespace_manager
 from google.appengine.api import mail
 
 from entities.user import User
 from entities.activate_key import ActivateKey
 from exception import AppError
 from handlers.base import BaseHandler
-
-ALLOWED_DOMAINS = ['ryobi-sol.co.jp', 'hardwave.net']
-
-def validate_email(email):
-    email_part = email.split('@')
-    return mail.is_email_valid(email) and (len(email_part) == 2) and (email_part[1] in ALLOWED_DOMAINS)
+import tenant
 
 class SignupPage(BaseHandler):
     def get(self):
@@ -24,8 +20,8 @@ class SignupPage(BaseHandler):
             email = self.request.get('email')
             hkey = self.request.get('hkey')
             
-            if not validate_email(email):
-                raise AppError(u'認められていないメールアドレスです。')
+            tenant_id = tenant.get_tenant_id(email)
+            namespace_manager.set_namespace(tenant_id)
 
             if User.get_by_key_name(email):
                 raise AppError(u'このメールアドレスは、既に登録されています。')

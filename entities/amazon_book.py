@@ -1,10 +1,10 @@
 import bottlenose
 import lxml.etree
-import config
+import sysconf
 
 ns={'a': 'http://webservices.amazon.com/AWSECommerceService/2011-08-01'}
 
-amazon = bottlenose.Amazon(config.AWS_ACCESS_KEY_ID, config.AWS_SECRET_ACCESS_KEY, config.ASSOCIATE_TAG, Region='JP')
+amazon = bottlenose.Amazon(sysconf.AWS_ACCESS_KEY_ID, sysconf.AWS_SECRET_ACCESS_KEY, sysconf.ASSOCIATE_TAG, Region='JP')
 
 def search(Book, keyword):
     resp = amazon.ItemSearch(Keywords=keyword, ResponseGroup='ItemAttributes,Images', SearchIndex='Books')
